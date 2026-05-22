@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>NOVA Startup Technologie CI | Vente d'appareils high-tech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* Animation du menu burger */
+        .menu-open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .menu-open span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-open span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        /* Scrollbar personnalisée */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body class="bg-[#0b1220] text-white">
+
+<div id="app"></div>
+
+<script>
+    // Informations de l'entreprise
+    const companyInfo = {
+        name: "NOVA Startup Technologie CI",
+        siege: "Korhogo, CI",
+        tel: "+225 0554101873",
+        whatsappLink: "https://wa.me/2250554101873",
+        callLink: "tel:+2250554101873"
+    };
+
+    // Liste des appareils à vendre
+    const appareils = [
+        {
+            id: 1,
+            name: 'iPhone 15 Pro Max',
+            brand: 'Apple',
+            price: '850 000 FCFA',
+            oldPrice: '950 000 FCFA',
+            image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400',
+            rating: 4.8,
+            description: 'Smartphone haut de gamme avec puce A17 Pro, écran Super Retina XDR, système de caméra professionnel.',
+            specs: ['256 Go', 'Titane Naturel', 'iOS 17', 'Batterie 4422 mAh']
+        },
+        {
+            id: 2,
+            name: 'Samsung Galaxy S24 Ultra',
+            brand: 'Samsung',
+            price: '750 000 FCFA',
+            oldPrice: '850 000 FCFA',
+            image: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400',
+            rating: 4.7,
+            description: 'Smartphone Android avec S Pen intégré, appareil photo 200MP, écran Dynamic AMOLED 2X.',
+            specs: ['512 Go', 'Noir', 'Android 14', 'S Pen inclus']
+        },
+        {
+            id: 3,
+            name: 'MacBook Pro M3',
+            brand: 'Apple',
+            price: '1 850 000 FCFA',
+            oldPrice: '2 100 000 FCFA',
+            image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400',
+            rating: 4.9,
+            description: 'Ordinateur portable professionnel avec puce M3, écran Liquid Retina XDR, autonomie 22h.',
+            specs: ['16 Go RAM', '512 Go SSD', '14 pouces', '3 ports Thunderbolt']
+        },
+        {
+            id: 4,
+            name: 'iPad Pro 12.9"',
+            brand: 'Apple',
+            price: '950 000 FCFA',
+            oldPrice: '1 050 000 FCFA',
+            image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400',
+            rating: 4.8,
+            description: 'Tablette professionnelle avec puce M2, écran Liquid Retina XDR, compatible Apple Pencil.',
+            specs: ['256 Go', 'WiFi + Cellular', '12.9 pouces', 'Face ID']
+        },
+        {
+            id: 5,
+            name: 'AirPods Pro 2',
+            brand: 'Apple',
+            price: '185 000 FCFA',
+            oldPrice: '225 000 FCFA',
+            image: 'https://images.unsplash.com/photo-1606220588913-b3aac3c3ad56?w=400',
+            rating: 4.6,
+            description: 'Écouteurs sans fil avec réduction de bruit active, audio spatial personnalisé.',
+            specs: ['USB-C', 'Boeîtier MagSafe', 'Autonomie 30h', 'IP54']
+        },
+        {
+            id: 6,
+            name: 'Xiaomi Watch S3',
+            brand: 'Xiaomi',
+            price: '85 000 FCFA',
+            oldPrice: '120 000 FCFA',
+            image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400',
+            rating: 4.5,
+            description: 'Montre connectée avec GPS, mesure de la fréquence cardiaque, suivi sportif avancé.',
+            specs: ['1.43 pouces', 'Autonomie 15j', 'Étanche 5ATM', 'Bluetooth 5.2']
+        },
+        {
+            id: 7,
+            name: 'Casque Sony WH-1000XM5',
+            brand: 'Sony',
+            price: '250 000 FCFA',
+            oldPrice: '350 000 FCFA',
+            image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400',
+            rating: 4.9,
+            description: 'Casque audio avec réduction de bruit exceptionnelle, son haute résolution.',
+            specs: ['Autonomie 30h', 'Bluetooth 5.2', 'Recharge USB-C', 'Pliable']
+        },
+        {
+            id: 8,
+            name: 'Smart TV LG OLED C3',
+            brand: 'LG',
+            price: '1 250 000 FCFA',
+            oldPrice: '1 550 000 FCFA',
+            image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400',
+            rating: 4.8,
+            description: 'Télévision OLED 55 pouces avec processeur α9 Gen6, Dolby Vision IQ.',
+            specs: ['55 pouces', '4K Ultra HD', 'WebOS 23', 'HDMI 2.1']
+        },
+        {
+            id: 9,
+            name: 'Canon EOS R50',
+            brand: 'Canon',
+            price: '550 000 FCFA',
+            oldPrice: '650 000 FCFA',
+            image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400',
+            rating: 4.7,
+            description: 'Appareil photo hybride avec capteur 24.2MP, vidéo 4K, autofocus double pixel.',
+            specs: ['24.2 MP', '4K Video', 'RF Mount', 'Bluetooth/WiFi']
+        },
+        {
+            id: 10,
+            name: 'Dell XPS 15',
+            brand: 'Dell',
+            price: '1 550 000 FCFA',
+            oldPrice: '1 850 000 FCFA',
+            image: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400',
+            rating: 4.8,
+            description: 'Ordinateur portable ultra-performance avec écran OLED 3.5K, processeur Intel Core i9.',
+            specs: ['32 Go RAM', '1 To SSD', 'RTX 4070', 'Écran 15.6" OLED']
+        },
+        {
+            id: 11,
+            name: 'JBL Charge 5',
+            brand: 'JBL',
+            price: '120 000 FCFA',
+            oldPrice: '160 000 FCFA',
+            image: 'https://images.unsplash.com/photo-1603196766999-4e0f6ce4369b?w=400',
+            rating: 4.6,
+            description: 'Enceinte Bluetooth portable, étanche IP67, batterie 20h, puissance 40W.',
+            specs: ['40W', 'IP67', 'Bluetooth 5.1', 'Batterie 20h']
+        },
+        {
+            id: 12,
+            name: 'GoPro HERO12 Black',
+            brand: 'GoPro',
+            price: '380 000 FCFA',
+            oldPrice: '450 000 FCFA',
+            image: 'https://images.unsplash.com/photo-1507721999474-8ed4421c4af2?w=400',
+            rating: 4.9,
+            description: 'Caméra d\'action avec stabilisation HyperSmooth 6.0, vidéo 5.3K, étanche 10m.',
+            specs: ['5.3K Video', '27MP', 'Étanche 10m', 'Stabilisation avancée']
+        }
+    ];
+
+    const products = [
+        {
+            id: 1,
+            name: 'Caméra IP WiFi Smart',
+            brand: 'Hikvision',
+            category: 'IP WiFi',
+            resolution: '2MP Full HD',
+            connection: 'WiFi',
+            port: 'RJ45',
+            price: '65 000 FCFA',
+            image: 'https://via.placeholder.com/600x400?text=Camera+IP+WiFi',
+            advantages: ['Accès mobile', 'Très bonne qualité image', 'Surveillance intelligente'],
+            disadvantages: ['Dépend du réseau', 'Plus coûteuse']
+        },
+        {
+            id: 2,
+            name: 'Caméra Analogique HD',
+            brand: 'Dahua',
+            category: 'Analogique',
+            resolution: '1080P',
+            connection: 'Coaxial',
+            port: 'BNC',
+            price: '30 000 FCFA',
+            image: 'https://via.placeholder.com/600x400?text=Camera+Analogique',
+            advantages: ['Très économique', 'Installation simple', 'Bonne stabilité'],
+            disadvantages: ['Plus de câblage', 'Moins intelligente']
+        },
+        {
+            id: 3,
+            name: 'Caméra PTZ 4K',
+            brand: 'Uniview',
+            category: 'PTZ',
+            resolution: '4MP Ultra HD',
+            connection: 'Câble Réseau',
+            port: 'RJ45 + POE',
+            price: '120 000 FCFA',
+            image: 'https://via.placeholder.com/600x400?text=Camera+PTZ',
+            advantages: ['Rotation intelligente', 'Zoom puissant', 'Très haute résolution'],
+            disadvantages: ['Prix élevé', 'Installation technique']
+        }
+    ];
+
+    const kits = [
+        { id: 1, title: 'Kit Maison Basic', cameras: '4 Caméras HD', recorder: 'DVR 4 Ports', storage: '500 Go', price: '180 000 FCFA' },
+        { id: 2, title: 'Kit Commerce Pro', cameras: '8 Caméras IP', recorder: 'NVR 8 Ports', storage: '2 To', price: '550 000 FCFA' }
+    ];
+
+    const realisations = [
+        { id: 1, name: "Site E-commerce de Mode", url: "#", description: "Plateforme complète de vente en ligne pour une marque de vêtements", technologies: ["React", "Node.js", "MongoDB", "Stripe"] },
+        { id: 2, name: "Application de Livraison", url: "#", description: "Solution de livraison à domicile avec suivi en temps réel", technologies: ["React Native", "Express", "PostgreSQL", "Socket.io"] },
+        { id: 3, name: "Portfolio Créatif", url: "#", description: "Site vitrine pour photographe professionnel", technologies: ["Next.js", "Tailwind CSS", "Framer Motion"] },
+        { id: 4, name: "Plateforme Éducative", url: "#", description: "E-learning avec cours en ligne et certifications", technologies: ["Vue.js", "Django", "MySQL"] }
+    ];
+
+    const comparaisonData = [
+        { technologie: 'Caméra IP', resolution: 'HD à 4K', connexion: 'WiFi / RJ45', ports: 'RJ45 / POE', usage: 'Intelligent' },
+        { technologie: 'Caméra Analogique', resolution: '720P à 5MP', connexion: 'Coaxial', ports: 'BNC', usage: 'Économique' }
+    ];
+
+    let menuOpen = false;
+    let currentPage = 'home';
+    let selectedAppareil = null;
+
+    // Fonction pour calculer le pourcentage de réduction
+    function getDiscountPercentage(price, oldPrice) {
+        const priceNum = parseInt(price.replace(/[^0-9]/g, ''));
+        const oldPriceNum = parseInt(oldPrice.replace(/[^0-9]/g, ''));
+        return Math.round((1 - priceNum / oldPriceNum) * 100);
+    }
+
+    // Fonction pour rendre la page Appareils
+    function renderAppareilsPage() {
+        return `
+            <div class="pt-24 px-6 pb-16">
+                <div class="max-w-7xl mx-auto">
+                    <button onclick="navigateTo('home')" class="mb-8 flex items-center gap-2 text-blue-400 hover:text-blue-300 transition">
+                        ← Retour à l'accueil
+                    </button>
+                    
+                    <div class="flex justify-between items-center mb-8 flex-wrap gap-4">
+                        <div>
+                            <h2 class="text-4xl font-black mb-2">Appareils en vente</h2>
+                            <p class="text-gray-300">Découvrez notre sélection de produits high-tech aux meilleurs prix</p>
+                        </div>
+                        <div class="flex gap-2 flex-wrap">
+                            <button onclick="filterAppareils('all')" class="bg-[#1f2937] px-4 py-2 rounded-xl text-sm hover:bg-blue-600 transition filter-btn" data-filter="all">Tous</button>
+                            <button onclick="filterAppareils('Apple')" class="bg-[#1f2937] px-4 py-2 rounded-xl text-sm hover:bg-blue-600 transition filter-btn" data-filter="Apple">Apple</button>
+                            <button onclick="filterAppareils('Samsung')" class="bg-[#1f2937] px-4 py-2 rounded-xl text-sm hover:bg-blue-600 transition filter-btn" data-filter="Samsung">Samsung</button>
+                            <button onclick="filterAppareils('Xiaomi')" class="bg-[#1f2937] px-4 py-2 rounded-xl text-sm hover:bg-blue-600 transition filter-btn" data-filter="Xiaomi">Xiaomi</button>
+                            <button onclick="filterAppareils('Sony')" class="bg-[#1f2937] px-4 py-2 rounded-xl text-sm hover:bg-blue-600 transition filter-btn" data-filter="Sony">Sony</button>
+                        </div>
+                    </div>
+
+                    <div id="appareils-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        ${renderAppareilsGrid(appareils)}
+                    </div>
+
+                    <div class="mt-12 bg-gradient-to-r from-green-900/50 to-blue-900/50 rounded-2xl p-6 text-center border border-green-500/30">
+                        <p class="text-lg mb-2">💡 Livraison gratuite à Korhogo et ses environs</p>
+                        <p class="text-sm text-gray-300">Paiement sécurisé • Garantie 1 an • Service client WhatsApp</p>
+                        <button onclick="window.open('${companyInfo.whatsappLink}', '_blank')" class="mt-4 bg-green-600 hover:bg-green-700 px-6 py-2 rounded-xl font-semibold transition inline-flex items-center gap-2">
+                            💬 Commander via WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderAppareilsGrid(items) {
+        if (items.length === 0) {
+            return `<div class="col-span-full text-center py-12 text-gray-400">Aucun appareil trouvé</div>`;
+        }
+        
+        return items.map(appareil => {
+            const discount = getDiscountPercentage(appareil.price, appareil.oldPrice);
+            return `
+                <div class="bg-[#1f2937] rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 hover:shadow-xl transition-all duration-300 group">
+                    <div class="relative overflow-hidden">
+                        <img src="${appareil.image}" alt="${appareil.name}" class="w-full h-40 object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-2 left-2 bg-red-600 text-xs px-2 py-1 rounded-full">
+                            -${discount}%
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center gap-1 mb-1">
+                            <span class="text-yellow-400 text-sm">★</span>
+                            <span class="text-xs">${appareil.rating}</span>
+                            <span class="text-gray-500 text-xs">• ${appareil.brand}</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-1 line-clamp-1">${appareil.name}</h3>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-green-400 font-bold">${appareil.price}</span>
+                            <span class="text-gray-500 text-sm line-through">${appareil.oldPrice}</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mb-4 line-clamp-2">${appareil.description}</p>
+                        <button onclick="showDetails(${JSON.stringify(appareil).replace(/"/g, '&quot;')})" class="w-full bg-blue-600 hover:bg-blue-700 py-2.5 rounded-xl text-sm font-semibold transition flex items-center justify-center gap-2">
+                            Voir les détails →
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function filterAppareils(brand) {
+        const filtered = brand === 'all' ? appareils : appareils.filter(a => a.brand === brand);
+        document.getElementById('appareils-grid').innerHTML = renderAppareilsGrid(filtered);
+        
+        // Mettre à jour l'active des filtres
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('bg-blue-600');
+            btn.classList.add('bg-[#1f2937]');
+            if (btn.getAttribute('data-filter') === brand) {
+                btn.classList.remove('bg-[#1f2937]');
+                btn.classList.add('bg-blue-600');
+            }
+        });
+    }
+
+    function showDetails(appareil) {
+        selectedAppareil = appareil;
+        renderModal();
+        document.getElementById('modal-overlay').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('modal-overlay').classList.add('hidden');
+        document.body.style.overflow = 'unset';
+        selectedAppareil = null;
+    }
+
+    function renderModal() {
+        if (!selectedAppareil) return;
+        
+        const modalHtml = `
+            <div id="modal-overlay" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4" onclick="closeModal()">
+                <div class="bg-[#1f2937] rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+                    <div class="relative">
+                        <img src="${selectedAppareil.image}" alt="${selectedAppareil.name}" class="w-full h-64 object-cover rounded-t-3xl">
+                        <button onclick="closeModal()" class="absolute top-4 right-4 bg-black/50 rounded-full p-2 hover:bg-black/70">
+                            ✕
+                        </button>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+                            <div>
+                                <h2 class="text-2xl font-bold">${selectedAppareil.name}</h2>
+                                <p class="text-blue-400">${selectedAppareil.brand}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-2xl font-bold text-green-400">${selectedAppareil.price}</p>
+                                <p class="text-sm text-gray-400 line-through">${selectedAppareil.oldPrice}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-yellow-400">★</span>
+                            <span>${selectedAppareil.rating}</span>
+                            <span class="text-gray-400">•</span>
+                            <button onclick="window.open('${companyInfo.whatsappLink}', '_blank')" class="text-green-400 hover:text-green-300">
+                                Acheter via WhatsApp →
+                            </button>
+                        </div>
+                        <p class="text-gray-300 mb-4">${selectedAppareil.description}</p>
+                        <div class="bg-[#111827] rounded-2xl p-4 mb-4">
+                            <h3 class="font-bold mb-2">Caractéristiques techniques :</h3>
+                            <ul class="grid grid-cols-2 gap-2">
+                                ${selectedAppareil.specs.map(spec => `<li class="text-gray-300 text-sm">• ${spec}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <button onclick="window.open('${companyInfo.whatsappLink}', '_blank')" class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-2xl font-bold transition flex items-center justify-center gap-2">
+                            💬 Commander sur WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        if (!document.getElementById('modal-container')) {
+            const container = document.createElement('div');
+            container.id = 'modal-container';
+            document.body.appendChild(container);
+        }
+        document.getElementById('modal-container').innerHTML = modalHtml;
+    }
+
+    function renderRealisationPage() {
+        return `
+            <div class="pt-24 px-6 pb-16">
+                <div class="max-w-7xl mx-auto">
+                    <button onclick="navigateTo('home')" class="mb-8 flex items-center gap-2 text-blue-400 hover:text-blue-300 transition">
+                        ← Retour à l'accueil
+                    </button>
+                    <h2 class="text-4xl font-black mb-4">Nos Réalisations</h2>
+                    <p class="text-gray-300 mb-12">Découvrez quelques-uns des sites et applications que nous avons développés</p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        ${realisations.map(real => `
+                            <div class="bg-[#1f2937] rounded-2xl p-6 border border-gray-700 hover:border-blue-500 transition">
+                                <h3 class="text-2xl font-bold mb-2 text-blue-400">${real.name}</h3>
+                                <p class="text-gray-300 mb-4">${real.description}</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    ${real.technologies.map(tech => `<span class="bg-blue-600/30 px-3 py-1 rounded-full text-sm">${tech}</span>`).join('')}
+                                </div>
+                                <a href="${real.url}" class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition">
+                                    Voir le site →
+                                </a>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderHomePage() {
+        return `
+            <!-- Header -->
+            <header class="bg-gradient-to-r from-black via-gray-900 to-blue-950 pt-32 pb-20 px-6 border-b border-gray-800">
+                <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <span class="bg-blue-600 px-4 py-2 rounded-full text-sm font-semibold inline-block">
+                            Surveillance • Sécurité • Technologie
+                        </span>
+                        <h1 class="text-5xl lg:text-6xl font-black leading-tight mt-6 mb-6">
+                            ${companyInfo.name}
+                        </h1>
+                        <p class="text-gray-300 text-xl leading-relaxed max-w-2xl">
+                            Solutions professionnelles de vidéosurveillance IP et analogique pour maisons, commerces et entreprises.
+                        </p>
+                        <div class="flex flex-wrap gap-4 mt-8">
+                            <button onclick="scrollToProduits()" class="bg-blue-600 px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition">
+                                Voir les Produits
+                            </button>
+                            <button onclick="window.open('${companyInfo.whatsappLink}', '_blank')" class="border border-gray-600 px-8 py-4 rounded-2xl font-bold hover:bg-white hover:text-black transition flex items-center gap-2">
+                                💬 WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur rounded-3xl border border-white/10 p-8 shadow-2xl">
+                        <h2 class="text-3xl font-bold mb-6">Nos Services</h2>
+                        <div class="space-y-4 text-gray-300">
+                            ${['Installation Caméras', 'Maintenance 24/7', 'Configuration Réseau', 'Accès Mobile'].map(service => `
+                                <div class="flex justify-between border-b border-gray-700 pb-3">
+                                    <span>${service}</span>
+                                    <span class="text-green-400">Disponible</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tableau Comparatif -->
+            <section class="py-16 px-6 max-w-7xl mx-auto">
+                <div class="bg-white text-black rounded-3xl p-8 shadow-2xl">
+                    <h2 class="text-4xl font-black mb-8 text-center">Tableau Comparatif</h2>
+                    <div class="hidden md:block overflow-x-auto">
+                        <table class="w-full border-collapse">
+                            <thead>
+                                <tr class="bg-gray-100 text-left">
+                                    <th class="p-4">Technologie</th><th class="p-4">Résolution</th><th class="p-4">Connexion</th><th class="p-4">Ports</th><th class="p-4">Usage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${comparaisonData.map(item => `
+                                    <tr class="border-b">
+                                        <td class="p-4 font-semibold">${item.technologie}</td>
+                                        <td class="p-4">${item.resolution}</td>
+                                        <td class="p-4">${item.connexion}</td>
+                                        <td class="p-4">${item.ports}</td>
+                                        <td class="p-4">${item.usage}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="md:hidden space-y-4">
+                        ${comparaisonData.map(item => `
+                            <div class="bg-gray-50 rounded-2xl p-5 border border-gray-200">
+                                <div class="space-y-3">
+                                    <div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Technologie</span><span class="font-semibold text-right">${item.technologie}</span></div>
+                                    <div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Résolution</span><span class="text-right">${item.resolution}</span></div>
+                                    <div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Connexion</span><span class="text-right">${item.connexion}</span></div>
+                                    <div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Ports</span><span class="text-right">${item.ports}</span></div>
+                                    <div class="flex justify-between"><span class="font-bold text-gray-600">Usage</span><span class="text-right">${item.usage}</span></div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </section>
+
+            <!-- Produits Caméras -->
+            <section id="produits" class="py-16 px-6 bg-[#111827]">
+                <div class="max-w-7xl mx-auto">
+                    <div class="mb-12">
+                        <h2 class="text-5xl font-black mb-4">Caméras de Surveillance</h2>
+                        <p class="text-gray-300 text-lg max-w-4xl">Solutions modernes adaptées aux maisons, commerces et entreprises.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        ${products.map(product => `
+                            <div class="bg-[#1f2937] rounded-3xl overflow-hidden border border-gray-700 hover:border-blue-500 transition shadow-xl">
+                                <div class="relative overflow-hidden">
+                                    <img src="${product.image}" alt="${product.name}" class="w-full h-52 object-cover hover:scale-105 transition duration-500">
+                                    <div class="absolute top-4 right-4 bg-blue-600 px-4 py-2 rounded-full text-sm font-bold shadow-lg">${product.price}</div>
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex items-start justify-between gap-3 mb-4">
+                                        <div><h3 class="text-xl font-black leading-tight">${product.name}</h3><p class="text-blue-400 text-sm mt-1">${product.brand}</p></div>
+                                        <span class="bg-black px-3 py-1 rounded-full text-xs border border-gray-700">${product.resolution}</span>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3 mb-5 text-sm">
+                                        <div class="bg-[#111827] rounded-2xl p-3 border border-gray-700"><p class="text-gray-400 text-xs mb-1">Connexion</p><p class="font-semibold">${product.connection}</p></div>
+                                        <div class="bg-[#111827] rounded-2xl p-3 border border-gray-700"><p class="text-gray-400 text-xs mb-1">Ports</p><p class="font-semibold">${product.port}</p></div>
+                                    </div>
+                                    <details class="bg-[#111827] rounded-2xl border border-gray-700 overflow-hidden">
+                                        <summary class="cursor-pointer px-5 py-4 font-semibold hover:bg-[#172033] transition flex justify-between items-center">
+                                            <span>En savoir plus</span><span class="text-blue-400">+</span>
+                                        </summary>
+                                        <div class="px-5 pb-5 pt-3 text-sm text-gray-300 border-t border-gray-700">
+                                            <div class="mb-4"><h4 class="text-green-400 font-bold mb-2">Avantages</h4><ul class="list-disc pl-5 space-y-1">${product.advantages.map(a => `<li>${a}</li>`).join('')}</ul></div>
+                                            <div><h4 class="text-red-400 font-bold mb-2">Inconvénients</h4><ul class="list-disc pl-5 space-y-1">${product.disadvantages.map(d => `<li>${d}</li>`).join('')}</ul></div>
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </section>
+
+            <!-- Kits Professionnels -->
+            <section id="kits" class="py-16 px-6 max-w-7xl mx-auto">
+                <div class="bg-gradient-to-r from-blue-700 to-blue-900 rounded-3xl p-8 shadow-2xl">
+                    <h2 class="text-4xl font-black mb-8 text-center">Kits Professionnels</h2>
+                    <div class="hidden md:block overflow-x-auto bg-white text-black rounded-2xl">
+                        <table class="w-full border-collapse">
+                            <thead><tr class="bg-gray-100 text-left"><th class="p-4">Kit</th><th class="p-4">Caméras</th><th class="p-4">Enregistreur</th><th class="p-4">Stockage</th><th class="p-4">Prix</th></tr></thead>
+                            <tbody>${kits.map(kit => `<tr class="border-b"><td class="p-4 font-semibold">${kit.title}</td><td class="p-4">${kit.cameras}</td><td class="p-4">${kit.recorder}</td><td class="p-4">${kit.storage}</td><td class="p-4 font-bold text-blue-700">${kit.price}</td></tr>`).join('')}</tbody>
+                        </table>
+                    </div>
+                    <div class="md:hidden space-y-4">
+                        ${kits.map(kit => `
+                            <div class="bg-white text-black rounded-2xl p-5 shadow-lg">
+                                <h3 class="text-xl font-bold mb-4 text-blue-700 border-b border-gray-200 pb-2">${kit.title}</h3>
+                                <div class="space-y-3"><div class="flex justify-between"><span class="font-semibold text-gray-600">Caméras:</span><span>${kit.cameras}</span></div>
+                                <div class="flex justify-between"><span class="font-semibold text-gray-600">Enregistreur:</span><span>${kit.recorder}</span></div>
+                                <div class="flex justify-between"><span class="font-semibold text-gray-600">Stockage:</span><span>${kit.storage}</span></div>
+                                <div class="flex justify-between pt-3 border-t border-gray-200"><span class="font-semibold text-gray-600">Prix:</span><span class="font-bold text-blue-700 text-lg">${kit.price}</span></div></div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact -->
+            <section id="contact" class="py-20 px-6 bg-black border-t border-gray-800">
+                <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-5xl font-black mb-6 leading-tight">Besoin d’un devis ?</h2>
+                        <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">Nova Startup Technologie CI vous accompagne dans vos projets de vidéosurveillance.</p>
+                        <div class="mt-6 space-y-3">
+                            <p class="text-gray-300">📍 ${companyInfo.siege}</p>
+                            <p class="text-gray-300">📞 ${companyInfo.tel}</p>
+                            <p class="text-gray-300">💬 Disponible sur WhatsApp</p>
+                        </div>
+                    </div>
+                    <div class="bg-[#111827] border border-gray-700 rounded-3xl p-10 shadow-2xl">
+                        <h3 class="text-3xl font-black mb-8">Demande de devis</h3>
+                        <form class="space-y-5" onsubmit="event.preventDefault(); alert('Merci ! Nous vous contacterons sur WhatsApp.'); window.open('${companyInfo.whatsappLink}', '_blank');">
+                            <input type="text" placeholder="Nom complet" class="w-full bg-[#1f2937] border border-gray-600 rounded-2xl px-5 py-4 text-white">
+                            <input type="text" placeholder="Numéro WhatsApp" class="w-full bg-[#1f2937] border border-gray-600 rounded-2xl px-5 py-4 text-white">
+                            <textarea rows="5" placeholder="Décrivez votre besoin" class="w-full bg-[#1f2937] border border-gray-600 rounded-2xl px-5 py-4 text-white"></textarea>
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 transition py-4 rounded-2xl font-bold text-lg">Envoyer</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="bg-[#030712] border-t border-gray-800 py-12 px-6">
+                <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10">
+                    <div><h3 class="text-2xl font-black mb-4 text-white">${companyInfo.name}</h3><p class="text-gray-400 leading-relaxed">Spécialiste en vidéosurveillance et solutions technologiques intelligentes.</p></div>
+                    <div><h4 class="text-xl font-bold mb-4 text-white">Produits</h4><ul class="space-y-3 text-gray-400"><li>Caméras IP</li><li>Caméras Analogiques</li><li>DVR & NVR</li><li>Kits Professionnels</li></ul></div>
+                    <div><h4 class="text-xl font-bold mb-4 text-white">Services</h4><ul class="space-y-3 text-gray-400"><li>Installation</li><li>Maintenance</li><li>Configuration Réseau</li><li>Support Technique</li></ul></div>
+                    <div><h4 class="text-xl font-bold mb-4 text-white">Contact</h4><ul class="space-y-3 text-gray-400"><li>📍 ${companyInfo.siege}</li><li>📞 ${companyInfo.tel}</li><li>💬 WhatsApp Disponible</li></ul></div>
+                </div>
+                <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">© 2026 ${companyInfo.name} — Tous droits réservés.</div>
+            </footer>
+        `;
+    }
+
+    function renderApp() {
+        let content = '';
+        if (currentPage === 'appareils') {
+            content = renderAppareilsPage();
+        } else if (currentPage === 'realisation') {
+            content = renderRealisationPage();
+        } else {
+            content = renderHomePage();
+        }
+        
+        document.getElementById('app').innerHTML = `
+            <!-- Menu Burger -->
+            <nav class="fixed top-0 left-0 right-0 bg-[#0b1220]/95 backdrop-blur-md z-50 border-b border-gray-800">
+                <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+                    <button onclick="navigateTo('home')" class="text-left">
+                        <h1 class="text-xl font-bold text-blue-400">${companyInfo.name}</h1>
+                        <p class="text-xs text-gray-400">${companyInfo.siege}</p>
+                    </button>
+                    <div class="relative">
+                        <button id="menuBtn" class="flex flex-col gap-1.5 p-2 focus:outline-none hover:bg-white/10 rounded-lg transition">
+                            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+                            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+                            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+                        </button>
+                        <div id="dropdownMenu" class="absolute right-0 mt-2 w-64 bg-[#1a2332] rounded-2xl shadow-2xl border border-gray-700 overflow-hidden hidden opacity-0 scale-95 transition-all duration-300 origin-top-right">
+                            <div class="py-2">
+                                <button onclick="navigateTo('home'); closeMenu()" class="w-full text-left px-5 py-3 hover:bg-blue-600 transition flex items-center gap-3"><span class="text-xl">🏠</span><span>Accueil</span></button>
+                                <button onclick="scrollToProduits(); closeMenu()" class="w-full text-left px-5 py-3 hover:bg-blue-600 transition flex items-center gap-3"><span class="text-xl">📷</span><span>Caméras</span></button>
+                                <button onclick="navigateTo('appareils'); closeMenu()" class="w-full text-left px-5 py-3 hover:bg-blue-600 transition flex items-center gap-3"><span class="text-xl">📱</span><span>Appareils en vente</span></button>
+                                <button onclick="scrollToKits(); closeMenu()" class="w-full text-left px-5 py-3 hover:bg-blue-600 transition flex items-center gap-3"><span class="text-xl">📡</span><span>Kits Professionnels</span></button>
+                                <div class="border-t border-gray-700 my-2"></div>
+                                <button onclick="window.open('${companyInfo.whatsappLink}', '_blank'); closeMenu()" class="w-full text-left px-5 py-3 hover:bg-green-600 transition flex items-center gap-3"><span class="text-xl">💬</span><span>Contact (WhatsApp)</span></button>
+                                <button onclick="window.location.href='${companyInfo.callLink}'; closeMenu()" class="w-full text-left px-5 py-3 hover:bg-blue-600 transition flex items-center gap-3"><span class="text-xl">📞</span><span>Appeler</span></button>
+                                <div class="border-t border-gray-700 my-2"></div>
+                                <button onclick="navigateTo('realisation'); closeMenu()" class="w-full text-left px-5 py-3 hover:bg-purple-600 transition flex items-center gap-3"><span class="text-xl">🚀</span><span>Nos Réalisations</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            ${content}
+        `;
+        
+        // Réattacher les événements du menu
+        const menuBtn = document.getElementById('menuBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        
+        if (menuBtn && dropdownMenu) {
+            menuBtn.onclick = (e) => {
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('hidden');
+                dropdownMenu.classList.toggle('opacity-0');
+                dropdownMenu.classList.toggle('scale-95');
+                dropdownMenu.classList.toggle('opacity-100');
+                dropdownMenu.classList.toggle('scale-100');
+                menuBtn.classList.toggle('menu-open');
+            };
+            
+            document.addEventListener('click', (e) => {
+                if (!menuBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                    dropdownMenu.classList.add('hidden', 'opacity-0', 'scale-95');
+                    dropdownMenu.classList.remove('opacity-100', 'scale-100');
+                    menuBtn.classList.remove('menu-open');
+                }
+            });
+        }
+        
+        // Réattacher les événements spécifiques à la page appareils
+        if (currentPage === 'appareils') {
+            window.filterAppareils = filterAppareils;
+            window.showDetails = showDetails;
+        }
+        
+        // Réattacher closeModal si nécessaire
+        window.closeModal = closeModal;
+    }
+
+    // Fonctions globales
+    window.navigateTo = (page) => {
+        currentPage = page;
+        renderApp();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    
+    window.scrollToProduits = () => {
+        currentPage = 'home';
+        renderApp();
+        setTimeout(() => {
+            const element = document.getElementById('produits');
+            if (element) element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    };
+    
+    window.scrollToKits = () => {
+        currentPage = 'home';
+        renderApp();
+        setTimeout(() => {
+            const element = document.getElementById('kits');
+            if (element) element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    };
+    
+    window.closeMenu = () => {
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const menuBtn = document.getElementById('menuBtn');
+        if (dropdownMenu && menuBtn) {
+            dropdownMenu.classList.add('hidden', 'opacity-0', 'scale-95');
+            dropdownMenu.classList.remove('opacity-100', 'scale-100');
+            menuBtn.classList.remove('menu-open');
+        }
+    };
+    
+    // Initialisation
+    renderApp();
+</script>
+
+</body>
+</html>
