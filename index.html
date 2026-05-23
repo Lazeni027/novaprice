@@ -267,12 +267,12 @@
             brand: 'D @HUA',
             category: 'IP WiFi',
             connection: 'WiFi',
-            port: 'Douille',
+            budget : '30 000F - 35 000F',
             price: '30 000 FCFA',
             oldPrice: '32 000 FCFA',
             image: 'https://res.cloudinary.com/dhnj7fig7/image/upload/q_auto/f_auto/v1779499321/3_11_vvafvd.png',
             advantages: ['Accès mobile', 'Très bonne qualité image', 'Surveillance intelligente'],
-            disadvantages: ['Dépend du réseau', 'Plus coûteuse'],
+            disadvantages: ['Dépend du réseau', 'Peu coûteuse','Angle & Vision très limité'],
             code: 'NOVA01'
         },
         {
@@ -281,12 +281,12 @@
             brand: 'Calus',
             category: 'IP WiFi',
             connection: 'WiFi',
-            port: 'Douille',
+            budget : '15 000F - 20 000F',
             price: '15 000 FCFA',
             oldPrice: '17 000 FCFA',
             image: 'https://res.cloudinary.com/dhnj7fig7/image/upload/q_auto/f_auto/v1779499321/3_2_dcyl11.png',
             advantages: ['Accès mobile', 'Très bonne qualité image', 'Surveillance intelligente'],
-            disadvantages: ['Dépend du réseau', 'Plus coûteuse'],
+            disadvantages: ['Dépend du réseau', 'Peu coûteuse', 'Angle & Vision très limité'],
             code: 'NOVA02'
         },
         {
@@ -295,12 +295,12 @@
             brand: 'Calus',
             category: 'IP WiFi',
             connection: 'WiFi',
-            port: 'NULL',
+            budget : '40 000F - 50 000F',
             price: '40 000 FCFA',
             oldPrice: '45 000 FCFA',
             image: 'https://res.cloudinary.com/dhnj7fig7/image/upload/q_auto/f_auto/v1779499326/3_23_sbb3nz.png',
             advantages: ['Accès mobile', 'Très bonne qualité image', 'Surveillance intelligente'],
-            disadvantages: ['Dépend du réseau', 'Plus coûteuse'],
+            disadvantages: ['Dépend du réseau', 'Peu coûteuse'],
             code: 'NOVA03'
         },
         {
@@ -309,11 +309,11 @@
             brand: 'Dahua',
             category: 'Analogique',
             connection: 'Coaxial',
-            port: 'BNC',
+             budget : '80 000F - 220 000F',
             price: '15 000 FCFA',
             image: 'https://res.cloudinary.com/dhnj7fig7/image/upload/q_auto/f_auto/v1779499323/3_14_kao1yj.png',
             advantages: ['Très économique', 'Installation simple', 'Bonne stabilité'],
-            disadvantages: ['Plus de câblage', 'Moins intelligente'],
+            disadvantages: ['Plus de câblage', 'Garantie & Sécurisé'],
             code: 'NOVA04'
         },
         {
@@ -322,11 +322,11 @@
             brand: 'Dahua',
             category: 'Analogique',
             connection: 'Coaxial',
-            port: 'BNC',
-            price: '15 000 FCFA',
+            budget : '80 000F - 220 000F',
+            price: '22 000 FCFA',
             image: 'https://res.cloudinary.com/dhnj7fig7/image/upload/q_auto/f_auto/v1779499320/2_x90uja.png',
             advantages: ['Très économique', 'Installation simple', 'Bonne stabilité'],
-            disadvantages: ['Plus de câblage', 'Moins intelligente'],
+            disadvantages: ['Plus de câblage', 'Garantie & Sécurisé'],
             code: 'NOVA05'
         },
         {
@@ -624,7 +624,7 @@
                                     </div>
                                     <div class="grid grid-cols-2 gap-3 mb-5 text-sm">
                                         <div class="bg-[#111827] rounded-2xl p-3 border border-gray-700"><p class="text-gray-400 text-xs mb-1">Connexion</p><p class="font-semibold">${product.connection}</p></div>
-                                        <div class="bg-[#111827] rounded-2xl p-3 border border-gray-700"><p class="text-gray-400 text-xs mb-1">Ports</p><p class="font-semibold">${product.port}</p></div>
+                                        <div class="bg-[#111827] rounded-2xl p-3 border border-gray-700"><p class="text-gray-400 text-xs mb-1"></p><p class="font-semibold">${product.budget}</p></div>
                                     </div>
                                     <button onclick="commanderWhatsApp('${product.code}', '${product.name}', '${product.price}')" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded-xl font-semibold transition flex items-center justify-center gap-2 mb-3">
                                         💬 Commander (${product.code})
@@ -708,12 +708,12 @@
                         <table class="w-full border-collapse">
                             <thead><tr class="bg-gray-100 text-left"><th class="p-4">Technologie</th><th class="p-4">Résolution</th><th class="p-4">Connexion</th><th class="p-4">Ports</th><th class="p-4">Usage</th></tr></thead>
                             <tbody>
-                                ${comparaisonData.map(item => `<tr class="border-b"><td class="p-4 font-semibold">${item.technologie}</td><td class="p-4">${item.resolution}</td><td class="p-4">${item.connexion}</td><td class="p-4">${item.ports}</td><td class="p-4">${item.usage}</td></tr>`).join('')}
+                                ${comparaisonData.map(item => `<tr class="border-b"><td class="p-4 font-semibold">${item.technologie}</td><td class="p-4">${item.resolution}</td><td class="p-4">${item.connexion}</td><td class="p-4">${item.budget}</td><td class="p-4">${item.usage}</td></tr>`).join('')}
                             </tbody>
                         </table>
                     </div>
                     <div class="md:hidden space-y-4">
-                        ${comparaisonData.map(item => `<div class="bg-gray-50 rounded-2xl p-5 border border-gray-200"><div class="space-y-3"><div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Technologie</span><span class="font-semibold text-right">${item.technologie}</span></div><div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Résolution</span><span class="text-right">${item.resolution}</span></div><div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Connexion</span><span class="text-right">${item.connexion}</span></div><div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Ports</span><span class="text-right">${item.ports}</span></div><div class="flex justify-between"><span class="font-bold text-gray-600">Usage</span><span class="text-right">${item.usage}</span></div></div></div>`).join('')}
+                        ${comparaisonData.map(item => `<div class="bg-gray-50 rounded-2xl p-5 border border-gray-200"><div class="space-y-3"><div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Technologie</span><span class="font-semibold text-right">${item.technologie}</span></div><div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Résolution</span><span class="text-right">${item.resolution}</span></div><div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Connexion</span><span class="text-right">${item.connexion}</span></div><div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Ports</span><span class="text-right">${item.budget}</span></div><div class="flex justify-between"><span class="font-bold text-gray-600">Usage</span><span class="text-right">${item.usage}</span></div></div></div>`).join('')}
                     </div>
                 </div>
             </section>
