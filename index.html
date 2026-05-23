@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    
     <title>NOVA Startup Technologie CI | Vente d'appareils high-tech</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -28,7 +27,6 @@
             overflow: hidden;
         }
         
-        /* Animation du menu burger */
         .menu-open span:nth-child(1) {
             transform: rotate(45deg) translate(5px, 5px);
         }
@@ -41,7 +39,6 @@
             transform: rotate(-45deg) translate(7px, -6px);
         }
         
-        /* Scrollbar personnalisée */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -60,42 +57,62 @@
         }
 
         #produits img {
-    transform: scale(0.85);
-    object-fit: contain;
-}
+            transform: scale(0.85);
+            object-fit: contain;
+        }
 
-/* Réduire toute la carte caméra */
-#produits .bg-\[\#1f2937\] {
-    transform: scale(0.98);
-    margin: 1px 1px 1px 2px;
-    transition: transform 0.3s ease;
-}
+        #produits .bg-\[\#1f2937\] {
+            transform: scale(0.98);
+            margin: 1px 1px 1px 2px;
+            transition: transform 0.3s ease;
+        }
 
-/* Option : au survol, revient à taille normale */
-#produits .bg-\[\#1f2937\]:hover {
-    transform: scale(0.9);
-}
+        #produits .bg-\[\#1f2937\]:hover {
+            transform: scale(0.9);
+        }
 
-
-</style>
-    
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 1.5rem;
+            padding: 1rem 0.5rem;
+            scrollbar-width: thin;
+        }
+        
+        .horizontal-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .horizontal-scroll::-webkit-scrollbar-track {
+            background: #1f2937;
+            border-radius: 10px;
+        }
+        
+        .horizontal-scroll::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 10px;
+        }
+        
+        .card-appareil {
+            flex: 0 0 auto;
+            width: 260px;
+        }
+    </style>
 </head>
 <body class="bg-[#0b1220] text-white">
 
 <div id="app"></div>
 
-
 <script>
-    // Informations de l'entreprise
     const companyInfo = {
-        name: "NOVA Startup Technologie CI",
+        name: "NOVA Startup Tech. CI",
         siege: "Korhogo, CI",
         tel: "+225 0554101873",
         whatsappLink: "https://wa.me/+2250554101873",
         callLink: "tel:+2250554101873"
     };
 
-    // Liste des appareils à vendre
     const appareils = [
         {
             id: 1,
@@ -106,7 +123,8 @@
             image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400',
             rating: 4.8,
             description: 'Smartphone haut de gamme avec puce A17 Pro, écran Super Retina XDR, système de caméra professionnel.',
-            specs: ['256 Go', 'Titane Naturel', 'iOS 17', 'Batterie 4422 mAh']
+            specs: ['256 Go', 'Titane Naturel', 'iOS 17', 'Batterie 4422 mAh'],
+            code: 'NOVA24'
         },
         {
             id: 2,
@@ -117,7 +135,8 @@
             image: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400',
             rating: 4.7,
             description: 'Smartphone Android avec S Pen intégré, appareil photo 200MP, écran Dynamic AMOLED 2X.',
-            specs: ['512 Go', 'Noir', 'Android 14', 'S Pen inclus']
+            specs: ['512 Go', 'Noir', 'Android 14', 'S Pen inclus'],
+            code: 'NOVA25'
         },
         {
             id: 3,
@@ -128,7 +147,8 @@
             image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400',
             rating: 4.9,
             description: 'Ordinateur portable professionnel avec puce M3, écran Liquid Retina XDR, autonomie 22h.',
-            specs: ['16 Go RAM', '512 Go SSD', '14 pouces', '3 ports Thunderbolt']
+            specs: ['16 Go RAM', '512 Go SSD', '14 pouces', '3 ports Thunderbolt'],
+            code: 'NOVA26'
         },
         {
             id: 4,
@@ -139,7 +159,8 @@
             image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400',
             rating: 4.8,
             description: 'Tablette professionnelle avec puce M2, écran Liquid Retina XDR, compatible Apple Pencil.',
-            specs: ['256 Go', 'WiFi + Cellular', '12.9 pouces', 'Face ID']
+            specs: ['256 Go', 'WiFi + Cellular', '12.9 pouces', 'Face ID'],
+            code: 'NOVA27'
         },
         {
             id: 5,
@@ -150,7 +171,8 @@
             image: 'https://images.unsplash.com/photo-1606220588913-b3aac3c3ad56?w=400',
             rating: 4.6,
             description: 'Écouteurs sans fil avec réduction de bruit active, audio spatial personnalisé.',
-            specs: ['USB-C', 'Boeîtier MagSafe', 'Autonomie 30h', 'IP54']
+            specs: ['USB-C', 'Boeîtier MagSafe', 'Autonomie 30h', 'IP54'],
+            code: 'NOVA28'
         },
         {
             id: 6,
@@ -161,7 +183,8 @@
             image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400',
             rating: 4.5,
             description: 'Montre connectée avec GPS, mesure de la fréquence cardiaque, suivi sportif avancé.',
-            specs: ['1.43 pouces', 'Autonomie 15j', 'Étanche 5ATM', 'Bluetooth 5.2']
+            specs: ['1.43 pouces', 'Autonomie 15j', 'Étanche 5ATM', 'Bluetooth 5.2'],
+            code: 'NOVA29'
         },
         {
             id: 7,
@@ -172,7 +195,8 @@
             image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400',
             rating: 4.9,
             description: 'Casque audio avec réduction de bruit exceptionnelle, son haute résolution.',
-            specs: ['Autonomie 30h', 'Bluetooth 5.2', 'Recharge USB-C', 'Pliable']
+            specs: ['Autonomie 30h', 'Bluetooth 5.2', 'Recharge USB-C', 'Pliable'],
+            code: 'NOVA30'
         },
         {
             id: 8,
@@ -183,7 +207,8 @@
             image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400',
             rating: 4.8,
             description: 'Télévision OLED 55 pouces avec processeur α9 Gen6, Dolby Vision IQ.',
-            specs: ['55 pouces', '4K Ultra HD', 'WebOS 23', 'HDMI 2.1']
+            specs: ['55 pouces', '4K Ultra HD', 'WebOS 23', 'HDMI 2.1'],
+            code: 'NOVA31'
         },
         {
             id: 9,
@@ -194,7 +219,8 @@
             image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400',
             rating: 4.7,
             description: 'Appareil photo hybride avec capteur 24.2MP, vidéo 4K, autofocus double pixel.',
-            specs: ['24.2 MP', '4K Video', 'RF Mount', 'Bluetooth/WiFi']
+            specs: ['24.2 MP', '4K Video', 'RF Mount', 'Bluetooth/WiFi'],
+            code: 'NOVA32'
         },
         {
             id: 10,
@@ -205,7 +231,8 @@
             image: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400',
             rating: 4.8,
             description: 'Ordinateur portable ultra-performance avec écran OLED 3.5K, processeur Intel Core i9.',
-            specs: ['32 Go RAM', '1 To SSD', 'RTX 4070', 'Écran 15.6" OLED']
+            specs: ['32 Go RAM', '1 To SSD', 'RTX 4070', 'Écran 15.6" OLED'],
+            code: 'NOVA33'
         },
         {
             id: 11,
@@ -216,7 +243,8 @@
             image: 'https://images.unsplash.com/photo-1603196766999-4e0f6ce4369b?w=400',
             rating: 4.6,
             description: 'Enceinte Bluetooth portable, étanche IP67, batterie 20h, puissance 40W.',
-            specs: ['40W', 'IP67', 'Bluetooth 5.1', 'Batterie 20h']
+            specs: ['40W', 'IP67', 'Bluetooth 5.1', 'Batterie 20h'],
+            code: 'NOVA34'
         },
         {
             id: 12,
@@ -227,7 +255,8 @@
             image: 'https://images.unsplash.com/photo-1507721999474-8ed4421c4af2?w=400',
             rating: 4.9,
             description: 'Caméra d\'action avec stabilisation HyperSmooth 6.0, vidéo 5.3K, étanche 10m.',
-            specs: ['5.3K Video', '27MP', 'Étanche 10m', 'Stabilisation avancée']
+            specs: ['5.3K Video', '27MP', 'Étanche 10m', 'Stabilisation avancée'],
+            code: 'NOVA35'
         }
     ];
 
@@ -237,83 +266,81 @@
             name: 'Caméra IP WiFi Smart',
             brand: 'D @HUA',
             category: 'IP WiFi',
-            resolution: 'Full HD',
             connection: 'WiFi',
             port: 'Douille',
             price: '30 000 FCFA',
-             oldPrice: '32 000 FCFA',
+            oldPrice: '32 000 FCFA',
             image: 'https://res.cloudinary.com/dhnj7fig7/image/upload/q_auto/f_auto/v1779499321/3_11_vvafvd.png',
             advantages: ['Accès mobile', 'Très bonne qualité image', 'Surveillance intelligente'],
-            disadvantages: ['Dépend du réseau', 'Plus coûteuse']
+            disadvantages: ['Dépend du réseau', 'Plus coûteuse'],
+            code: 'NOVA01'
         },
-         {
+        {
             id: 2,
             name: 'Caméra IP WiFi Smart',
             brand: 'Calus',
             category: 'IP WiFi',
-            resolution: 'Full HD',
             connection: 'WiFi',
             port: 'Douille',
             price: '15 000 FCFA',
-             oldPrice: '17 000 FCFA',
+            oldPrice: '17 000 FCFA',
             image: 'https://res.cloudinary.com/dhnj7fig7/image/upload/q_auto/f_auto/v1779499321/3_2_dcyl11.png',
             advantages: ['Accès mobile', 'Très bonne qualité image', 'Surveillance intelligente'],
-            disadvantages: ['Dépend du réseau', 'Plus coûteuse']
+            disadvantages: ['Dépend du réseau', 'Plus coûteuse'],
+            code: 'NOVA02'
         },
-           {
+        {
             id: 3,
             name: 'Caméra IP WiFi Smart',
             brand: 'Calus',
             category: 'IP WiFi',
-            resolution: 'Full HD',
             connection: 'WiFi',
             port: 'NULL',
             price: '40 000 FCFA',
-             oldPrice: '45 000 FCFA',
+            oldPrice: '45 000 FCFA',
             image: 'https://res.cloudinary.com/dhnj7fig7/image/upload/q_auto/f_auto/v1779499326/3_23_sbb3nz.png',
             advantages: ['Accès mobile', 'Très bonne qualité image', 'Surveillance intelligente'],
-            disadvantages: ['Dépend du réseau', 'Plus coûteuse']
+            disadvantages: ['Dépend du réseau', 'Plus coûteuse'],
+            code: 'NOVA03'
         },
         {
             id: 4,
             name: 'Caméra Analogique HD',
             brand: 'Dahua',
             category: 'Analogique',
-            resolution: '1080P',
             connection: 'Coaxial',
             port: 'BNC',
             price: '15 000 FCFA',
             image: 'https://res.cloudinary.com/dhnj7fig7/image/upload/q_auto/f_auto/v1779499323/3_14_kao1yj.png',
             advantages: ['Très économique', 'Installation simple', 'Bonne stabilité'],
-            disadvantages: ['Plus de câblage', 'Moins intelligente']
+            disadvantages: ['Plus de câblage', 'Moins intelligente'],
+            code: 'NOVA04'
         },
-
-         {
+        {
             id: 5,
             name: 'Caméra Analogique HD',
             brand: 'Dahua',
             category: 'Analogique',
-            resolution: '1080P',
             connection: 'Coaxial',
             port: 'BNC',
             price: '15 000 FCFA',
             image: 'https://res.cloudinary.com/dhnj7fig7/image/upload/q_auto/f_auto/v1779499320/2_x90uja.png',
             advantages: ['Très économique', 'Installation simple', 'Bonne stabilité'],
-            disadvantages: ['Plus de câblage', 'Moins intelligente']
+            disadvantages: ['Plus de câblage', 'Moins intelligente'],
+            code: 'NOVA05'
         },
-
         {
             id: 6,
             name: 'Caméra Wifi fixe',
             brand: 'Uniview',
             category: 'ip',
-            resolution: '4MP Ultra HD',
             connection: 'autonomie',
             port: 'NULL',
             price: '30 000 FCFA',
             image: 'https://res.cloudinary.com/dhnj7fig7/image/upload/q_auto/f_auto/v1779499327/3_6_vykqia.png',
             advantages: ['Rotation intelligente', 'Zoom puissant', 'Très haute résolution'],
-            disadvantages: ['Prix élevé', 'Installation technique']
+            disadvantages: ['Prix élevé', 'Installation technique'],
+            code: 'NOVA06'
         }
     ];
 
@@ -329,7 +356,6 @@
         { id: 4, name: "Plateforme Éducative", url: "#", description: "E-learning avec cours en ligne et certifications", technologies: ["Vue.js", "Django", "MySQL"] }
     ];
 
-    // CORRECTION : Ajout de la virgule manquante entre les lignes 258 et 259
     const comparaisonData = [
         { technologie: 'Caméra IP', resolution: 'HD à 4K', connexion: 'WiFi / RJ45', ports: 'RJ45 / POE', usage: 'Professionnel & Premium' },
         { technologie: 'Caméra Analogique', resolution: '720P à 5MP', connexion: 'Coaxial', ports: 'BNC', usage: 'Économique & Professionnel' },
@@ -340,14 +366,19 @@
     let currentPage = 'home';
     let selectedAppareil = null;
 
-    // Fonction pour calculer le pourcentage de réduction
     function getDiscountPercentage(price, oldPrice) {
+        if(!oldPrice) return 0;
         const priceNum = parseInt(price.replace(/[^0-9]/g, ''));
         const oldPriceNum = parseInt(oldPrice.replace(/[^0-9]/g, ''));
+        if(isNaN(priceNum) || isNaN(oldPriceNum) || oldPriceNum === 0) return 0;
         return Math.round((1 - priceNum / oldPriceNum) * 100);
     }
 
-    // Fonction pour rendre la page Appareils
+    function commanderWhatsApp(code, nom, prix) {
+        const message = `Bonjour NOVA Startup Technologie CI, je souhaite commander l'appareil suivant :%0A%0A🔹 Code unique : ${code}%0A🔹 Produit : ${nom}%0A🔹 Prix : ${prix}%0A%0AMerci de me contacter pour la suite de ma commande.`;
+        window.open(`${companyInfo.whatsappLink}?text=${message}`, '_blank');
+    }
+
     function renderAppareilsPage() {
         return `
             <div class="pt-24 px-6 pb-16">
@@ -426,7 +457,6 @@
         const filtered = brand === 'all' ? appareils : appareils.filter(a => a.brand === brand);
         document.getElementById('appareils-grid').innerHTML = renderAppareilsGrid(filtered);
         
-        // Mettre à jour l'active des filtres
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.classList.remove('bg-blue-600');
             btn.classList.add('bg-[#1f2937]');
@@ -466,7 +496,7 @@
                         <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
                             <div>
                                 <h2 class="text-2xl font-bold">${selectedAppareil.name}</h2>
-                                <p class="text-blue-400">${selectedAppareil.brand}</p>
+                                <p class="text-blue-400">${selectedAppareil.brand} | Code: ${selectedAppareil.code || 'NOVAXX'}</p>
                             </div>
                             <div class="text-right">
                                 <p class="text-2xl font-bold text-green-400">${selectedAppareil.price}</p>
@@ -477,7 +507,7 @@
                             <span class="text-yellow-400">★</span>
                             <span>${selectedAppareil.rating}</span>
                             <span class="text-gray-400">•</span>
-                            <button onclick="window.open('${companyInfo.whatsappLink}', '_blank')" class="text-green-400 hover:text-green-300">
+                            <button onclick="commanderWhatsApp('${selectedAppareil.code || 'NOVAXX'}', '${selectedAppareil.name}', '${selectedAppareil.price}'); closeModal()" class="text-green-400 hover:text-green-300">
                                 Acheter via WhatsApp →
                             </button>
                         </div>
@@ -488,8 +518,8 @@
                                 ${selectedAppareil.specs.map(spec => `<li class="text-gray-300 text-sm">• ${spec}</li>`).join('')}
                             </ul>
                         </div>
-                        <button onclick="window.open('${companyInfo.whatsappLink}', '_blank')" class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-2xl font-bold transition flex items-center justify-center gap-2">
-                            💬 Commander sur WhatsApp
+                        <button onclick="commanderWhatsApp('${selectedAppareil.code || 'NOVAXX'}', '${selectedAppareil.name}', '${selectedAppareil.price}'); closeModal()" class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-2xl font-bold transition flex items-center justify-center gap-2">
+                            💬 Commander sur WhatsApp (Code: ${selectedAppareil.code || 'NOVAXX'})
                         </button>
                     </div>
                 </div>
@@ -533,8 +563,9 @@
     }
 
     function renderHomePage() {
+        const autresAppareils = appareils.slice(0, 8);
+        
         return `
-            <!-- Header -->
             <header class="bg-gradient-to-r from-black via-gray-900 to-blue-950 pt-32 pb-20 px-6 border-b border-gray-800">
                 <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
                     <div>
@@ -570,47 +601,6 @@
                 </div>
             </header>
 
-            <!-- Tableau Comparatif -->
-            <section class="py-16 px-6 max-w-7xl mx-auto">
-                <div class="bg-white text-black rounded-3xl p-8 shadow-2xl">
-                    <h2 class="text-4xl font-black mb-8 text-center">Tableau Comparatif</h2>
-                    <div class="hidden md:block overflow-x-auto">
-                        <table class="w-full border-collapse">
-                            <thead>
-                                <tr class="bg-gray-100 text-left">
-                                    <th class="p-4">Technologie</th><th class="p-4">Résolution</th><th class="p-4">Connexion</th><th class="p-4">Ports</th><th class="p-4">Usage</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${comparaisonData.map(item => `
-                                    <tr class="border-b">
-                                        <td class="p-4 font-semibold">${item.technologie}</td>
-                                        <td class="p-4">${item.resolution}</td>
-                                        <td class="p-4">${item.connexion}</td>
-                                        <td class="p-4">${item.ports}</td>
-                                        <td class="p-4">${item.usage}</td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="md:hidden space-y-4">
-                        ${comparaisonData.map(item => `
-                            <div class="bg-gray-50 rounded-2xl p-5 border border-gray-200">
-                                <div class="space-y-3">
-                                    <div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Technologie</span><span class="font-semibold text-right">${item.technologie}</span></div>
-                                    <div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Résolution</span><span class="text-right">${item.resolution}</span></div>
-                                    <div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Connexion</span><span class="text-right">${item.connexion}</span></div>
-                                    <div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Ports</span><span class="text-right">${item.ports}</span></div>
-                                    <div class="flex justify-between"><span class="font-bold text-gray-600">Usage</span><span class="text-right">${item.usage}</span></div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            </section>
-
-            <!-- Produits Caméras -->
             <section id="produits" class="py-16 px-6 bg-[#111827]">
                 <div class="max-w-7xl mx-auto">
                     <div class="mb-12">
@@ -618,21 +608,27 @@
                         <p class="text-gray-300 text-lg max-w-4xl">Solutions modernes adaptées aux maisons, commerces et entreprises.</p>
                     </div>
                     <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-                        ${products.map(product => `
+                        ${products.map(product => {
+                            const discount = getDiscountPercentage(product.price, product.oldPrice);
+                            return `
                             <div class="bg-[#1f2937] rounded-3xl overflow-hidden border border-gray-700 hover:border-blue-500 transition shadow-xl">
                                 <div class="relative overflow-hidden">
                                     <img src="${product.image}" alt="${product.name}" class="w-full h-41 object-cover hover:scale-105 transition duration-500">
                                     <div class="absolute top-4 right-4 bg-blue-600 px-4 py-2 rounded-full text-sm font-bold shadow-lg">${product.price}</div>
+                                    ${discount > 0 ? `<div class="absolute top-4 left-4 bg-red-600 px-2 py-1 rounded-full text-xs">-${discount}%</div>` : ''}
                                 </div>
                                 <div class="p-5">
                                     <div class="flex items-start justify-between gap-3 mb-4">
-                                        <div><h3 class="text-xl font-black leading-tight">${product.name}</h3><p class="text-blue-400 text-sm mt-1">${product.brand}</p></div>
-                                        <span class="bg-black px-3 py-1 rounded-full text-xs border border-gray-700">${product.resolution}</span>
+                                        <div><h3 class="text-xl font-black leading-tight">${product.name}</h3><p class="text-blue-400 text-sm mt-1">${product.brand} | Code: ${product.code}</p></div>
+                                        <span class="bg-black px-3 py-1 rounded-full text-xs border border-gray-700">${product.connection}</span>
                                     </div>
                                     <div class="grid grid-cols-2 gap-3 mb-5 text-sm">
                                         <div class="bg-[#111827] rounded-2xl p-3 border border-gray-700"><p class="text-gray-400 text-xs mb-1">Connexion</p><p class="font-semibold">${product.connection}</p></div>
                                         <div class="bg-[#111827] rounded-2xl p-3 border border-gray-700"><p class="text-gray-400 text-xs mb-1">Ports</p><p class="font-semibold">${product.port}</p></div>
                                     </div>
+                                    <button onclick="commanderWhatsApp('${product.code}', '${product.name}', '${product.price}')" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded-xl font-semibold transition flex items-center justify-center gap-2 mb-3">
+                                        💬 Commander (${product.code})
+                                    </button>
                                     <details class="bg-[#111827] rounded-2xl border border-gray-700 overflow-hidden">
                                         <summary class="cursor-pointer px-5 py-4 font-semibold hover:bg-[#172033] transition flex justify-between items-center">
                                             <span>En savoir plus</span><span class="text-blue-400">+</span>
@@ -644,19 +640,50 @@
                                     </details>
                                 </div>
                             </div>
+                        `}).join('')}
+                    </div>
+                    
+                    <div class="mt-12 text-center">
+                        <button onclick="navigateTo('appareils')" class="bg-purple-600 hover:bg-purple-700 px-8 py-4 rounded-2xl font-bold transition inline-flex items-center gap-3 text-lg">
+                            📱 Voir tous nos appareils (Smartphones, Ordinateurs, Tablettes...)
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-16 px-6 bg-[#0f172a]">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
+                        <h2 class="text-4xl font-black">Autres appareils populaires</h2>
+                        <button onclick="navigateTo('appareils')" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-xl transition flex items-center gap-2">
+                            Voir tout →
+                        </button>
+                    </div>
+                    <div class="horizontal-scroll">
+                        ${autresAppareils.map(app => `
+                            <div class="card-appareil bg-[#1f2937] rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500 transition flex-shrink-0">
+                                <img src="${app.image}" alt="${app.name}" class="w-full h-32 object-cover">
+                                <div class="p-3">
+                                    <p class="text-xs text-blue-400">${app.code}</p>
+                                    <h3 class="font-bold text-sm mt-1 line-clamp-1">${app.name}</h3>
+                                    <p class="text-green-400 font-bold text-sm mt-1">${app.price}</p>
+                                    <button onclick="commanderWhatsApp('${app.code}', '${app.name}', '${app.price}')" class="w-full bg-green-600 hover:bg-green-700 py-1.5 rounded-lg text-xs font-semibold transition mt-2">
+                                        Commander
+                                    </button>
+                                </div>
+                            </div>
                         `).join('')}
                     </div>
                 </div>
             </section>
 
-            <!-- Kits Professionnels -->
-            <section id="kits" class="py-16 px-6 max-w-7xl mx-auto">
+            <section class="py-16 px-6 max-w-7xl mx-auto">
                 <div class="bg-gradient-to-r from-blue-700 to-blue-900 rounded-3xl p-8 shadow-2xl">
                     <h2 class="text-4xl font-black mb-8 text-center">Kits Professionnels</h2>
                     <div class="hidden md:block overflow-x-auto bg-white text-black rounded-2xl">
                         <table class="w-full border-collapse">
-                            <thead><tr class="bg-gray-100 text-left"><th class="p-4">Kit</th><th class="p-4">Caméras</th><th class="p-4">Enregistreur</th><th class="p-4">Stockage</th><th class="p-4">Prix</th> </tr></thead>
-                            <tbody>${kits.map(kit => `<tr class="border-b"><td class="p-4 font-semibold">${kit.title}</td><td class="p-4">${kit.cameras}</td><td class="p-4">${kit.recorder}</td><td class="p-4">${kit.storage}</td><td class="p-4 font-bold text-blue-700">${kit.price}</td></tr>`).join('')}</tbody>
+                            <thead><tr class="bg-gray-100 text-left"><th class="p-4">Kit</th><th class="p-4">Caméras</th><th class="p-4">Enregistreur</th><th class="p-4">Stockage</th><th class="p-4">Prix</th><th class="p-4"></th></tr></thead>
+                            <tbody>${kits.map(kit => `<tr class="border-b"><td class="p-4 font-semibold">${kit.title}</td><td class="p-4">${kit.cameras}</td><td class="p-4">${kit.recorder}</td><td class="p-4">${kit.storage}</td><td class="p-4 font-bold text-blue-700">${kit.price}</td><td class="p-4"><button onclick="commanderWhatsApp('KIT${kit.id}', '${kit.title}', '${kit.price}')" class="bg-green-600 text-white px-4 py-1 rounded-lg text-sm hover:bg-green-700">Commander</button></td></tr>`).join('')}</tbody>
                         </table>
                     </div>
                     <div class="md:hidden space-y-4">
@@ -666,14 +693,31 @@
                                 <div class="space-y-3"><div class="flex justify-between"><span class="font-semibold text-gray-600">Caméras:</span><span>${kit.cameras}</span></div>
                                 <div class="flex justify-between"><span class="font-semibold text-gray-600">Enregistreur:</span><span>${kit.recorder}</span></div>
                                 <div class="flex justify-between"><span class="font-semibold text-gray-600">Stockage:</span><span>${kit.storage}</span></div>
-                                <div class="flex justify-between pt-3 border-t border-gray-200"><span class="font-semibold text-gray-600">Prix:</span><span class="font-bold text-blue-700 text-lg">${kit.price}</span></div></div>
+                                <div class="flex justify-between pt-3 border-t border-gray-200"><span class="font-semibold text-gray-600">Prix:</span><span class="font-bold text-blue-700 text-lg">${kit.price}</span></div>
+                                <button onclick="commanderWhatsApp('KIT${kit.id}', '${kit.title}', '${kit.price}')" class="w-full bg-green-600 text-white py-2 rounded-xl mt-3 hover:bg-green-700">Commander</button></div>
                             </div>
                         `).join('')}
                     </div>
                 </div>
             </section>
 
-            <!-- Contact -->
+            <section class="py-16 px-6 max-w-7xl mx-auto">
+                <div class="bg-white text-black rounded-3xl p-8 shadow-2xl">
+                    <h2 class="text-4xl font-black mb-8 text-center">Tableau Comparatif</h2>
+                    <div class="hidden md:block overflow-x-auto">
+                        <table class="w-full border-collapse">
+                            <thead><tr class="bg-gray-100 text-left"><th class="p-4">Technologie</th><th class="p-4">Résolution</th><th class="p-4">Connexion</th><th class="p-4">Ports</th><th class="p-4">Usage</th></tr></thead>
+                            <tbody>
+                                ${comparaisonData.map(item => `<tr class="border-b"><td class="p-4 font-semibold">${item.technologie}</td><td class="p-4">${item.resolution}</td><td class="p-4">${item.connexion}</td><td class="p-4">${item.ports}</td><td class="p-4">${item.usage}</td></tr>`).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="md:hidden space-y-4">
+                        ${comparaisonData.map(item => `<div class="bg-gray-50 rounded-2xl p-5 border border-gray-200"><div class="space-y-3"><div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Technologie</span><span class="font-semibold text-right">${item.technologie}</span></div><div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Résolution</span><span class="text-right">${item.resolution}</span></div><div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Connexion</span><span class="text-right">${item.connexion}</span></div><div class="flex justify-between border-b border-gray-200 pb-2"><span class="font-bold text-gray-600">Ports</span><span class="text-right">${item.ports}</span></div><div class="flex justify-between"><span class="font-bold text-gray-600">Usage</span><span class="text-right">${item.usage}</span></div></div></div>`).join('')}
+                    </div>
+                </div>
+            </section>
+
             <section id="contact" class="py-20 px-6 bg-black border-t border-gray-800">
                 <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
                     <div>
@@ -697,7 +741,6 @@
                 </div>
             </section>
 
-            <!-- Footer -->
             <footer class="bg-[#030712] border-t border-gray-800 py-12 px-6">
                 <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10">
                     <div><h3 class="text-2xl font-black mb-4 text-white">${companyInfo.name}</h3><p class="text-gray-400 leading-relaxed">Spécialiste en vidéosurveillance et solutions technologiques intelligentes.</p></div>
@@ -721,7 +764,6 @@
         }
         
         document.getElementById('app').innerHTML = `
-            <!-- Menu Burger -->
             <nav class="fixed top-0 left-0 right-0 bg-[#0b1220]/95 backdrop-blur-md z-50 border-b border-gray-800">
                 <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
                     <button onclick="navigateTo('home')" class="text-left">
@@ -753,7 +795,6 @@
             ${content}
         `;
         
-        // Réattacher les événements du menu
         const menuBtn = document.getElementById('menuBtn');
         const dropdownMenu = document.getElementById('dropdownMenu');
         
@@ -777,17 +818,15 @@
             });
         }
         
-        // Réattacher les événements spécifiques à la page appareils
         if (currentPage === 'appareils') {
             window.filterAppareils = filterAppareils;
             window.showDetails = showDetails;
         }
         
-        // Réattacher closeModal si nécessaire
         window.closeModal = closeModal;
+        window.commanderWhatsApp = commanderWhatsApp;
     }
 
-    // Fonctions globales
     window.navigateTo = (page) => {
         currentPage = page;
         renderApp();
@@ -822,10 +861,8 @@
         }
     };
     
-    // Initialisation
     renderApp();
 </script>
-
 
 </body>
 </html>
