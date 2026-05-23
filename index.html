@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
     <title>NOVA Startup Technologie CI | Vente d'appareils high-tech</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -307,11 +308,11 @@
         { id: 4, name: "Plateforme Éducative", url: "#", description: "E-learning avec cours en ligne et certifications", technologies: ["Vue.js", "Django", "MySQL"] }
     ];
 
+    // CORRECTION : Ajout de la virgule manquante entre les lignes 258 et 259
     const comparaisonData = [
         { technologie: 'Caméra IP', resolution: 'HD à 4K', connexion: 'WiFi / RJ45', ports: 'RJ45 / POE', usage: 'Professionnel & Premium' },
-        { technologie: 'Caméra Analogique', resolution: '720P à 5MP', connexion: 'Coaxial', ports: 'BNC', usage: 'Économique & Professionnel' }
+        { technologie: 'Caméra Analogique', resolution: '720P à 5MP', connexion: 'Coaxial', ports: 'BNC', usage: 'Économique & Professionnel' },
         { technologie: 'Wifi', resolution: '4MP à 12MP', connexion: 'Prise', ports: 'Chargeur', usage: 'très economique' }
-
     ];
 
     let menuOpen = false;
@@ -633,7 +634,7 @@
                     <h2 class="text-4xl font-black mb-8 text-center">Kits Professionnels</h2>
                     <div class="hidden md:block overflow-x-auto bg-white text-black rounded-2xl">
                         <table class="w-full border-collapse">
-                            <thead><tr class="bg-gray-100 text-left"><th class="p-4">Kit</th><th class="p-4">Caméras</th><th class="p-4">Enregistreur</th><th class="p-4">Stockage</th><th class="p-4">Prix</th></tr></thead>
+                            <thead><tr class="bg-gray-100 text-left"><th class="p-4">Kit</th><th class="p-4">Caméras</th><th class="p-4">Enregistreur</th><th class="p-4">Stockage</th><th class="p-4">Prix</th> </tr></thead>
                             <tbody>${kits.map(kit => `<tr class="border-b"><td class="p-4 font-semibold">${kit.title}</td><td class="p-4">${kit.cameras}</td><td class="p-4">${kit.recorder}</td><td class="p-4">${kit.storage}</td><td class="p-4 font-bold text-blue-700">${kit.price}</td></tr>`).join('')}</tbody>
                         </table>
                     </div>
