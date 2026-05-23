@@ -58,11 +58,32 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #2563eb;
         }
-    </style>
+
+        #produits img {
+    transform: scale(0.85);
+    object-fit: contain;
+}
+
+/* Réduire toute la carte caméra */
+#produits .bg-\[\#1f2937\] {
+    transform: scale(0.98);
+    margin: 1px 1px 1px 2px;
+    transition: transform 0.3s ease;
+}
+
+/* Option : au survol, revient à taille normale */
+#produits .bg-\[\#1f2937\]:hover {
+    transform: scale(0.9);
+}
+
+
+</style>
+    
 </head>
 <body class="bg-[#0b1220] text-white">
 
 <div id="app"></div>
+
 
 <script>
     // Informations de l'entreprise
@@ -600,7 +621,7 @@
                         ${products.map(product => `
                             <div class="bg-[#1f2937] rounded-3xl overflow-hidden border border-gray-700 hover:border-blue-500 transition shadow-xl">
                                 <div class="relative overflow-hidden">
-                                    <img src="${product.image}" alt="${product.name}" class="w-full h-52 object-cover hover:scale-105 transition duration-500">
+                                    <img src="${product.image}" alt="${product.name}" class="w-full h-41 object-cover hover:scale-105 transition duration-500">
                                     <div class="absolute top-4 right-4 bg-blue-600 px-4 py-2 rounded-full text-sm font-bold shadow-lg">${product.price}</div>
                                 </div>
                                 <div class="p-5">
@@ -804,6 +825,7 @@
     // Initialisation
     renderApp();
 </script>
+
 
 </body>
 </html>
